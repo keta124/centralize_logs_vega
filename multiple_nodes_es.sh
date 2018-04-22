@@ -87,4 +87,4 @@ END
 
 systemctl daemon-reload
 
-echo "EDIT network.host trong file /opt/elasticsearch2/config/elasticsearch.yml"
+echo "EDIT network.host in file /opt/elasticsearch2/config/elasticsearch.yml"
