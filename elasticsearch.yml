@@ -1,0 +1,29 @@
+#
+cluster.name: production
+#
+node.name: ${HOSTNAME}
+node.master: false
+node.data: true
+#
+path.data: /datalog/elasticsearch/
+#path.data: /datalog/elasticsearch2/
+path.logs: /var/log/elasticsearch/
+
+#
+bootstrap.mlockall: true
+#
+network.host: [_bond0_, _local_]
+
+#
+discovery.zen.ping.unicast.hosts: ["172.18.10.103:9300","172.18.10.106:9300","172.18.10.108:9300"]
+discovery.zen.minimum_master_nodes: 2
+
+#
+indices.memory.index_buffer_size: 40%
+indices.breaker.fielddata.limit: 40%
+indices.breaker.request.limit: 30%
+indices.breaker.total.limit: 50%
+
+# HOT WARM
+node.box_type: hot
+cluster.routing.allocation.same_shard.host: true
