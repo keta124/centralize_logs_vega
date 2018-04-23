@@ -1,0 +1,23 @@
+MY_NOTDRM_URIPATH (?:/[A-Za-z0-9$.+!*'(){},~;=@#%&_\-]*)+:%{MY_CHANNEL:streaming_channel}(?:.*/%{RTYPE:request_type})(%{INT:bitrate:int})?(?:[^\.]*)\.%{FILETYPE:filetype}
+
+MY_DRM_URIPATH (?:/[A-Za-z0-9$.+!*'(){},~;=@#%&_\-]*)+:%{MY_CHANNEL:streaming_channel}(?:(.*%{AVTYPE:avtype}.*)br)?(%{INT:bitrate:int})?(?:[^(?=cinit)\.]*)?(%{CINIT:cinit})?(?:[^\.]*)?\.%{FILETYPE:filetype}
+
+VOD_DRM_URIPATH (?:/[A-Za-z0-9$.+!*'(){},~:;=@#%_\-]*)+%{POSINT:content_id}((?:(.*%{AVTYPE:avtype}.*)br)(%{INT:bitrate})?(?:.*)?\.|(.*manifest.))%{FILETYPE:filetype}
+
+VOD_NOTDRM_URIPATH (?:/[A-Za-z0-9$.+!*'(){},~:;=@#%_\-]*)+%{POSINT:content_id:int}\.mp4(.*)\/(%{RTYPE:request_type})(%{INT:bitrate:int})?(_%{AVTYPE:avtype})?(?:.*)?\.%{FILETYPE:filetype}
+
+MY_NOTDRM_URI %{URIPROTO}://(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?%{MY_NOTDRM_URIPATH}(?:%{URIPARAM})?
+
+MY_DRM_URI %{URIPROTO}://(?:%{USER}(?::[^@]*)?@)?(?:%{URIHOST})?%{MY_DRM_URIPATH}(?:%{URIPARAM})?
+
+URIOREMPTY (?:%{GREEDYDATA}|-|)
+XFORWARDFOR (?:%{IPORHOST}|-)
+
+MY_CHANNEL (?:[\w.]*)
+WORD_NO_US (?:[A-Za-z0-9]*)
+
+FILETYPE (ts|m4s|m3u8|mpd|aac)
+AVTYPE (audio|video|ao|vo)
+RTYPE (media_b|chunklist_b|playlist|chunk_)
+
+CINIT (cinit)
